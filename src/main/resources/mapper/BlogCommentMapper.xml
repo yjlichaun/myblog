@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muyi.blog.my.core.mapper.BlogCommentMapper">
+    <resultMap id="BaseResultMap" type="com.muyi.blog.my.core.entity.BlogComment">
+        <id column="comment_id" jdbcType="BIGINT" property="commentId"/>
+        <result column="blog_id" jdbcType="BIGINT" property="blogId"/>
+        <result column="commentator" jdbcType="VARCHAR" property="commentator"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="website_url" jdbcType="VARCHAR" property="websiteUrl"/>
+        <result column="comment_body" jdbcType="VARCHAR" property="commentBody"/>
+        <result column="comment_create_time" jdbcType="TIMESTAMP" property="commentCreateTime"/>
+        <result column="commentator_ip" jdbcType="VARCHAR" property="commentatorIp"/>
+        <result column="reply_body" jdbcType="VARCHAR" property="replyBody"/>
+        <result column="reply_create_time" jdbcType="TIMESTAMP" property="replyCreateTime"/>
+        <result column="comment_status" jdbcType="TINYINT" property="commentStatus"/>
+        <result column="is_deleted" jdbcType="TINYINT" property="isDeleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        comment_id, blog_id, commentator, email, website_url, comment_body, comment_create_time,
+    commentator_ip, reply_body, reply_create_time, comment_status, is_deleted
+    </sql>
+
+    <select id="getTotalComments" parameterType="Map" resultType="int">
+        select count(*) from tb_blog_comment
+        where is_deleted = 0
+        <if test="blogId!=null">
+            and blog_id = #{blogId}
+        </if>
+        <if test="commentStatus!=null">
+            and comment_status = #{commentStatus}
+        </if>
+    </select>
+</mapper>
