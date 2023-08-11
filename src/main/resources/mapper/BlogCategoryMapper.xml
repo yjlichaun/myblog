@@ -52,4 +52,56 @@
         </set>
         where category_id = #{categoryId,jdbcType=INTEGER}
     </update>
+
+    <insert id="insertCategory" parameterType="com.muyi.blog.my.core.entity.BlogCategory">
+        insert into tb_blog_category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="categoryId != null">
+                category_id,
+            </if>
+            <if test="categoryName != null">
+                category_name,
+            </if>
+            <if test="categoryIcon != null">
+                category_icon,
+            </if>
+            <if test="categoryRank != null">
+                category_rank,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="categoryId != null">
+                #{categoryId,jdbcType=INTEGER},
+            </if>
+            <if test="categoryName != null">
+                #{categoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="categoryIcon != null">
+                #{categoryIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="categoryRank != null">
+                #{categoryRank,jdbcType=INTEGER},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="deleteCategories" parameterType="arraylist">
+        update tb_blog_category
+        set is_deleted = 1 where category_id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
 </mapper>

@@ -69,9 +69,13 @@ public class BlogController {
     }
     
     
-    
-    
-    
-    
-    
+    /**
+     * 根据博客id和删除博客
+     * @param ids id列表
+     * @return Result
+     */
+    @DeleteMapping("/blogs/delete")
+    public Result delete(@RequestBody Integer[] ids){
+        return blogService.deleteBlogByIds(ids);
+    }
 }

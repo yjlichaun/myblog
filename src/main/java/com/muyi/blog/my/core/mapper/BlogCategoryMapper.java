@@ -4,7 +4,11 @@ package com.muyi.blog.my.core.mapper;
 import com.muyi.blog.my.core.entity.BlogCategory;
 import com.muyi.blog.my.core.util.PageQueryUtil;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -31,7 +35,7 @@ public interface BlogCategoryMapper {
     List<BlogCategory> getAllCategories(PageQueryUtil pageUtil);
     
     /**
-     * 根据博客类别id获取博客类别对象
+     * 根据博客主键获取博客类别对象
      * @param blogCategoryId 博客类别id
      * @return 博客类别对象
      */
@@ -43,4 +47,28 @@ public interface BlogCategoryMapper {
      * @return 影响行数
      */
     int updateByPrimaryKeySelective(BlogCategory record);
+    
+    /**
+     * 添加一个博客类别
+     * @param category 博客类别
+     * @return 影响行数
+     */
+    
+    int insertCategory(BlogCategory category);
+    
+    /**
+     * 获取博客分类对象根据分类名称
+     * @param categoryName 分类名称
+     * @return 博客分类对象
+     */
+    @ResultMap("BaseResultMap")
+    @Select("select * from tb_blog_category where category_name = #{categoryName}")
+    BlogCategory getCategoryByName(@Param("categoryName") String categoryName);
+    
+    /**
+     * 根据id删除博客分类
+     * @param ids id列表
+     * @return  影响行数
+     */
+    int deleteCategories(Integer[] ids);
 }

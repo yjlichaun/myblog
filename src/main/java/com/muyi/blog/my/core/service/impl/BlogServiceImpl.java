@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -107,7 +107,7 @@ public class BlogServiceImpl implements BlogService {
         if (blogVo.getBlogSubUrl().trim().length() > 150) {
             return Result.failed("路径过长");
         }
-        if (StringUtils.hasText(blogVo.getBlogContent())) {
+        if (!StringUtils.hasText(blogVo.getBlogContent())) {
             return Result.failed("请输入文章内容");
         }
         if (blogVo.getBlogContent().trim().length() > 100000) {
@@ -118,8 +118,6 @@ public class BlogServiceImpl implements BlogService {
         }
         Blog blog = new Blog();
         BeanUtils.copyProperties(blogVo, blog);
-        blog.setCreateTime(new Date());
-        blog.setIsDeleted((byte) 1);
         BlogCategory blogCategory = categoryMapper.selectByPrimaryKey(blog.getBlogCategoryId());
         if (blogCategory == null){
             blog.setBlogCategoryId(0);
@@ -174,5 +172,19 @@ public class BlogServiceImpl implements BlogService {
         }
         return Result.failed("保存失败");
         
+    }
+    
+    @Override
+    @Transactional
+    public Result deleteBlogByIds(Integer[] ids) {
+        if (ids == null || ids.length < 1) {
+            return Result.failed("参数异常");
+        }
+        if (blogMapper.deleteBlogByIds(ids) > 0) {
+            if (blogTagRelationMapper.deleteBlogByIds(ids) > 0) {
+                return Result.ok("删除成功！！！");
+            }
+        }
+        return Result.failed("删除失败");
     }
 }

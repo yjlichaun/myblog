@@ -56,4 +56,22 @@ public interface BlogMapper {
      * @return 影响行数
      */
     int insertSelective(Blog record);
+    
+    /**
+     * 根据id删除博客
+     * @param ids id列表
+     * @return 影响行数
+     */
+    int deleteBlogByIds(Integer[] ids);
+    
+    /**
+     * 更新博客中的的博客分类属性
+     * @param categoryName 分类名称
+     * @param categoryId 分类id
+     * @param ids 要更改的id
+     * @return 影响行数
+     */
+    int updateBlogCategorys(@Param("categoryName") String categoryName,
+                            @Param("categoryId") Integer categoryId,
+                            @Param("ids")Integer[] ids);
 }

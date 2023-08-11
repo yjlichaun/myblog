@@ -18,4 +18,12 @@
             (#{item.blogId,jdbcType=BIGINT},#{item.tagId,jdbcType=INTEGER})
         </foreach>
     </insert>
+
+    <delete id="deleteBlogByIds">
+        delete from tb_blog_tag_relation
+        where blog_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

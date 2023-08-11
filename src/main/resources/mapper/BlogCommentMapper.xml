@@ -30,4 +30,68 @@
             and comment_status = #{commentStatus}
         </if>
     </select>
+
+    <select id="getCommentsList" parameterType="Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_blog_comment
+        <if test="blogId!=null">
+            and blog_id = #{blogId}
+        </if>
+        <if test="commentStatus!=null">
+            and coment_status = #{comentStatus}
+        </if>
+        <if test="start!=null and limit != null" >
+            limit #{page},#{limit}
+        </if>
+    </select>
+
+    <update id="checkDone">
+        update tb_blog_comment
+        set comment_status=1 where comment_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        and comment_status = 0
+    </update>
+
+    <update id="updateComment" parameterType="com.muyi.blog.my.core.entity.BlogComment">
+        update tb_blog_comment
+        <set>
+            <if test="blogId != null">
+                blog_id = #{blogId,jdbcType=BIGINT},
+            </if>
+            <if test="commentator != null">
+                commentator = #{commentator,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="websiteUrl != null">
+                website_url = #{websiteUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="commentBody != null">
+                comment_body = #{commentBody,jdbcType=VARCHAR},
+            </if>
+            <if test="commentCreateTime != null">
+                comment_create_time = #{commentCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="commentatorIp != null">
+                commentator_ip = #{commentatorIp,jdbcType=VARCHAR},
+            </if>
+            <if test="replyBody != null">
+                reply_body = #{replyBody,jdbcType=VARCHAR},
+            </if>
+            <if test="replyCreateTime != null">
+                reply_create_time = #{replyCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="commentStatus != null">
+                comment_status = #{commentStatus,jdbcType=TINYINT},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=TINYINT},
+            </if>
+        </set>
+        where comment_id = #{commentId,jdbcType=BIGINT}
+    </update>
 </mapper>

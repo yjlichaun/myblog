@@ -42,4 +42,11 @@ public interface BlogService {
      * @return Result
      */
     Result save(BlogVo blogVo);
+    
+    /**
+     * 根据博客id列表删除博客
+     * @param ids id列表
+     * @return Result
+     */
+    Result deleteBlogByIds(Integer[] ids);
 }

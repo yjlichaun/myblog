@@ -22,4 +22,12 @@ public interface BlogTagRelationMapper {
      * @return  影响行数
      */
     int batchInsert(@Param("relationList") List<BlogTagRelation> blogTagRelations);
+    
+    /**
+     * 删除博客与标签之间的绑定关系
+     * @param ids 博客id列表
+     * @return 影响行数
+     */
+    
+    int deleteBlogByIds(Integer[] ids);
 }
