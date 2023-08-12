@@ -30,4 +30,12 @@ public interface BlogTagRelationMapper {
      */
     
     int deleteBlogByIds(Integer[] ids);
+    
+    /**
+     * 查询标签关系列表
+     * @param ids 标签id列表
+     * @return 列表
+     */
+    List<Long> selectDistinctTagIds(Integer[] ids);
+    
 }

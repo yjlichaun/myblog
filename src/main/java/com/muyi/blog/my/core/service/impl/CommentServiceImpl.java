@@ -74,4 +74,15 @@ public class CommentServiceImpl implements CommentService {
         }
         return Result.failed("回复失败！！！");
     }
+    
+    @Override
+    public Result deleteCommentByIds(Integer[] ids) {
+        if (ids == null || ids.length < 1) {
+            return Result.failed("参数异常");
+        }
+        if (blogCommentMapper.deleteCommentByIds(ids) > 0) {
+            return Result.ok("删除成功！！！");
+        }
+        return Result.failed("删除失败");
+    }
 }

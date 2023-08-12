@@ -42,7 +42,7 @@
             and coment_status = #{comentStatus}
         </if>
         <if test="start!=null and limit != null" >
-            limit #{page},#{limit}
+            limit #{start},#{limit}
         </if>
     </select>
 
@@ -93,5 +93,15 @@
             </if>
         </set>
         where comment_id = #{commentId,jdbcType=BIGINT}
+    </update>
+
+
+    <update id="deleteCommentByIds" parameterType="arraylist">
+        update tb_blog_comment
+        set is_deleted = 1
+        where comment_id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
     </update>
 </mapper>

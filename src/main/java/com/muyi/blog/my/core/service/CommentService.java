@@ -38,4 +38,11 @@ public interface CommentService {
      * @return Result
      */
     Result reply(CommentVo commentVo);
+    
+    /**
+     * 删除评论
+     * @param ids 评论id
+     * @return Result
+     */
+    Result deleteCommentByIds(Integer[] ids);
 }

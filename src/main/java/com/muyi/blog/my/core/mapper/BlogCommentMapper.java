@@ -56,4 +56,12 @@ public interface BlogCommentMapper {
      * @return 影响行数
      */
     int updateComment(BlogComment comment);
+    
+    
+    /**
+     * 删除评论
+     * @param ids 评论id列表
+     * @return 影响行数
+     */
+    int deleteCommentByIds(Integer[] ids);
 }

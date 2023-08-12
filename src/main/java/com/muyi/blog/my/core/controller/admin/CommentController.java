@@ -3,6 +3,7 @@ package com.muyi.blog.my.core.controller.admin;
 import com.muyi.blog.my.core.service.CommentService;
 import com.muyi.blog.my.core.util.Result;
 import com.muyi.blog.my.core.vo.CommentVo;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,5 +51,15 @@ public class CommentController {
     @PostMapping("/comments/reply")
     public Result reply(@RequestBody CommentVo commentVo) {
         return commentService.reply(commentVo);
+    }
+    
+    /**
+     * 删除评论
+     * @param ids 评论id
+     * @return Result
+     */
+    @DeleteMapping("/comments/delete")
+    public Result delete(@RequestBody Integer[] ids) {
+        return commentService.deleteCommentByIds(ids);
     }
 }

@@ -36,4 +36,20 @@ public interface BlogTagMapper {
      * @param tagList 标签列表
      */
     void batchInsertBlogTag(List<BlogTag> tagList);
+    
+    /**
+     * 获取标签列表
+     * @param pageUtil 分页参数
+     * @return result
+     */
+    List<BlogTag> getTagList(PageQueryUtil pageUtil);
+    
+    /**
+     * 添加标签
+     * @param tag 标签对象
+     * @return result
+     */
+    int insertTag(BlogTag tag);
+    
+    int deleteTagByIds(Integer[] ids);
 }

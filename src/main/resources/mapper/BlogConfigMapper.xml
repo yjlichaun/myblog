@@ -11,4 +11,18 @@
     config_name, config_value, create_time, update_time
   </sql>
 
+  <update id="updateConfig" parameterType="com.muyi.blog.my.core.entity.BlogConfig" >
+    update tb_config
+    <set>
+      <if test="configValue != null">
+        config_value = #{configValue,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+  </update>
 </mapper>
