@@ -1,6 +1,7 @@
 package com.muyi.blog.my.core.mapper;
 
 import com.muyi.blog.my.core.entity.BlogTag;
+import com.muyi.blog.my.core.entity.BlogTagCount;
 import com.muyi.blog.my.core.util.PageQueryUtil;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -51,5 +52,16 @@ public interface BlogTagMapper {
      */
     int insertTag(BlogTag tag);
     
+    /**
+     * 根据id删除标签
+     * @param ids ids
+     * @return 影响行数
+     */
     int deleteTagByIds(Integer[] ids);
+    
+    /**
+     * 获取标签列表
+     * @return 列表
+     */
+    List<BlogTagCount> getTagCount();
 }

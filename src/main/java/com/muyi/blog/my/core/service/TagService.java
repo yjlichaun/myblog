@@ -1,7 +1,9 @@
 package com.muyi.blog.my.core.service;
 
+import com.muyi.blog.my.core.entity.BlogTagCount;
 import com.muyi.blog.my.core.util.Result;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,4 +40,6 @@ public interface TagService {
      * @return result
      */
     Result deleteTagByIds(Integer[] ids);
+    
+    List<BlogTagCount> getBlogTagCountForIndex();
 }

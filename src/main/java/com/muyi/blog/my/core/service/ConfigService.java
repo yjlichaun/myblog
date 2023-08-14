@@ -2,6 +2,8 @@ package com.muyi.blog.my.core.service;
 
 import com.muyi.blog.my.core.util.Result;
 
+import java.util.Map;
+
 /**
  * @author 历川
  * @version 1.0
@@ -18,4 +20,10 @@ public interface ConfigService {
      * @return 影响行数
      */
     int updateConfig(String configName, String configValue);
+    
+    /**
+     * 获取所有配置项
+     * @return
+     */
+    Map<String,String> getAllConfigs();
 }

@@ -71,4 +71,11 @@ public interface BlogCategoryMapper {
      * @return  影响行数
      */
     int deleteCategories(Integer[] ids);
+    
+    /**
+     * 根据分类id列表获取分类列表
+     * @param categoryIds ids
+     * @return 列表
+     */
+    List<BlogCategory> selectByCategoryIds(@Param("categoryIds") List<Integer> categoryIds);
 }

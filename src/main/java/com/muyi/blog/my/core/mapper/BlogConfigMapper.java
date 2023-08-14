@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 /**
  * @author 历川
  * @version 1.0
@@ -31,4 +33,12 @@ public interface BlogConfigMapper {
      * @return 影响行数
      */
     int updateConfig(BlogConfig blogConfig);
+    
+    /**
+     * 获取所有配置
+     * @return
+     */
+    @ResultMap("BaseResultMap")
+    @Select("select * from tb_config")
+    List<BlogConfig> selectAll();
 }

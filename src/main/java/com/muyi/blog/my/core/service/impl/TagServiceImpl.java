@@ -1,6 +1,7 @@
 package com.muyi.blog.my.core.service.impl;
 
 import com.muyi.blog.my.core.entity.BlogTag;
+import com.muyi.blog.my.core.entity.BlogTagCount;
 import com.muyi.blog.my.core.mapper.BlogTagMapper;
 import com.muyi.blog.my.core.mapper.BlogTagRelationMapper;
 import com.muyi.blog.my.core.service.TagService;
@@ -83,6 +84,11 @@ public class TagServiceImpl implements TagService {
             return Result.ok("删除成功!!!");
         }
         return Result.failed("删除失败");
+    }
+    
+    @Override
+    public List<BlogTagCount> getBlogTagCountForIndex() {
+        return blogTagMapper.getTagCount();
     }
 }
 

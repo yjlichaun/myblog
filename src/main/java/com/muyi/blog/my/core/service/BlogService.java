@@ -2,9 +2,12 @@ package com.muyi.blog.my.core.service;
 
 
 import com.muyi.blog.my.core.entity.BlogCategory;
+import com.muyi.blog.my.core.util.PageResult;
 import com.muyi.blog.my.core.util.Result;
 import com.muyi.blog.my.core.vo.BlogVo;
+import com.muyi.blog.my.core.vo.SimpleBlogListVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -49,4 +52,18 @@ public interface BlogService {
      * @return Result
      */
     Result deleteBlogByIds(Integer[] ids);
+    
+    /**
+     * 根据页码获取页面
+     * @param pageNum 页码
+     * @return PageResult;
+     */
+    PageResult getBlogForIndexPage(int pageNum);
+    
+    /**
+     * 根据类型获取博客列表
+     * @param type 类型
+     * @return  博客列表
+     */
+    List<SimpleBlogListVo> getBlogListForIndexPage(int type);
 }

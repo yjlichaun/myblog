@@ -74,4 +74,6 @@ public interface BlogMapper {
     int updateBlogCategorys(@Param("categoryName") String categoryName,
                             @Param("categoryId") Integer categoryId,
                             @Param("ids")Integer[] ids);
+    
+    List<Blog> findBlogListByType(@Param("type") int type, @Param("limit") int limit);
 }
